@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
+from scipy.interpolate import interp1d
 
 ## Almacene los datos de signal.dat y de incompletos.dat ##
 
@@ -55,13 +56,57 @@ def ift(g,N):
 senal_filt=ift(tf[:,1],np.shape(tf)[0]);
 fig_3=plt.figure()
 plt.plot(signal[:,0],senal_filt)
-plt.plot(signal[:,0],signal[:,2])
 plt.xlabel('Tiempo');
 plt.ylabel('Magnitud');
 plt.savefig("RozoDaniel_filtrada.pdf",dpi=fig_3.dpi);
 
+#Escriba un mensaje en la terminal explicando por que no puede hacer la transformada de Fourier de los datos de incompletos.dat #
+#fig=plt.figure()
+#plt.plot(incompletos[:,0],incompletos[:,2]);
+#plt.show()
 
- 
+# Haga una interpolacion cuadratica y una cubica de sus datos incompletos.dat con 512 puntos.  Haga la trasformada de Fourier de cada una de las series de datos interpoladas #
+
+cuad=interp1d(incompletos[:,0],incompletos[:,2],kind='quadratic');
+cub=interp1d(incompletos[:,0],incompletos[:,2],kind='cubic');
+
+t=np.linspace(incompletos[0,0],incompletos[-1,0], num=512)
+datos_cuad=cuad(t)
+datos_cubic=cub(t)
+
+tf_cuad=tdf(datos_cuad,np.shape(datos_cuad)[0],t[1]-t[0]);
+tf_cub=tdf(datos_cubic,np.shape(datos_cuad)[0],t[1]-t[0]);
+
+# Haga una grafica con tres subplots de las tres transformada de Fourier (datos de signal.dat y datos interpolados) y guardela sin mostrarla en ApellidoNombre_TF_interpola.pdf #
+
+tf=tdf(signal[:,2],np.shape(signal)[0],dt);
+
+fig_4=plt.figure()
+plt.subplot(1,3,1)
+plt.plot(tf[:,0],np.abs(tf[:,1]));
+plt.xlabel('Frecuencia');
+plt.ylabel('Magnitud');
+plt.title("senal")
+plt.subplot(1,3,2)
+plt.plot(tf_cuad[:,0],np.abs(tf_cuad[:,1]));
+plt.xlabel('Frecuencia');
+plt.ylabel('Magnitud');
+plt.title("Cuadratica")
+plt.subplot(1,3,3)
+plt.plot(tf_cub[:,0],np.abs(tf_cub[:,1]));
+plt.xlabel('Frecuencia');
+plt.ylabel('Magnitud');
+plt.title("Cubica")
+plt.savefig("RozoDaniel_TF_interpola.pdf",dpi=fig_4.dpi);
+
+
+
+
+
+
+
+
+
 
 
 
