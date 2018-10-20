@@ -99,11 +99,47 @@ plt.ylabel('Magnitud');
 plt.title("Cubica")
 plt.savefig("RozoDaniel_TF_interpola.pdf",dpi=fig_4.dpi);
 
+# Imprima un mensaje donde describa las diferencias encontradas entre la transformada deFourier de la senal original y las de las interpolaciones #
+
+
+#Aplique el filtro pasabajos con una frecuencia de corte fc=1000 Hz y con una frecuencia de corte de fc=500Hz#
+
+def filtro_pasabajos(arr,fc):
+ arr_fil=arr.copy()
+ arr_fil[np.where(np.abs(arr_fil[:,0])>fc),1]=0;
+ return arr_fil
+
+tf_fil_1000=filtro_pasabajos(tf,1000)
+tf_cuad_fil_1000=filtro_pasabajos(tf_cuad,1000);
+tf_cub_fil_1000=filtro_pasabajos(tf_cub,1000);
+tf_fil_500=filtro_pasabajos(tf,500)
+tf_cuad_fil_500=filtro_pasabajos(tf_cuad,500);
+tf_cub_fil_500=filtro_pasabajos(tf_cub,500);
+
+# Haga una grafica con dos subplots (uno para cada filtro) de las 3 senales filtradas y guardela sin mostrarla en ApellidoNombre_2Filtros.pdf #
+
+fig_5=plt.figure()
+plt.subplot(2,1,1)
+plt.plot(tf_fil_1000[:,0],tf_fil_1000[:,1],tf_cuad_fil_1000[:,0],tf_cuad_fil_1000[:,1]
+,tf_cub_fil_1000[:,0],tf_cub_fil_1000[:,1])
+plt.xlabel('Frecuencia');
+plt.ylabel('Magnitud');
+plt.title("Fc=1000Hz");
+plt.xlim(-1500,1500);
+plt.subplot(2,1,2)
+plt.plot(tf_fil_500[:,0],tf_fil_500[:,1],tf_cuad_fil_500[:,0],tf_cuad_fil_500[:,1]
+,tf_cub_fil_500[:,0],tf_cub_fil_500[:,1])
+plt.xlabel('Frecuencia');
+plt.ylabel('Magnitud');
+plt.title("Fc=500Hz");
+plt.xlim(-1000,1000);
+plt.savefig("RozoDaniel_2Filtros.pdf",dpi=fig_5.dpi);
 
 
 
 
 
+ 
 
 
 
