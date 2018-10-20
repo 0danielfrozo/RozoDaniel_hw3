@@ -8,7 +8,7 @@ incompletos= np.genfromtxt('incompletos.dat');
 
 ##Haga una grafica de los datos de signal.dat y guarde dicha grafica sin mostrarla ApellidoNombre_signal.pdf ##
 
-plt.plot(signal)
+plt.plot(signal[:,0],signal[:,2])
 plt.xlabel('Tiempo');
 plt.savefig("RozoDaniel_signal.pdf");
 
@@ -36,10 +36,32 @@ print "No se utilizo el paquete fftfreq"
 
 ## Imprima un mensaje donde indique cuales son las frecuencias principales de su senal ##
 
+print "Las frecuencias principales de la senal son: "
+frec_principales=tf[np.where(np.abs(tf[:,1])>300),0];
+print np.abs(frec_principales[np.where(frec_principales>0)])
+
+## Haga un filtro pasa bajos con frecuencia de corte fc=1000 Hz. realice la transformada inversa y haga una grafica de la senal filtrada. Guarde dicha grafica son mostrarla en ApellidoNombre_filtrada.pdf ## 
 
 
+tf[np.where(np.abs(tf[:,0])>1000),1]=0;
+
+def ift(g,N):
+ n=np.arange(-N/2,N/2); 
+ k=n.reshape((N,1)); 
+ ft=np.exp(2j * np.pi * k * n/(N+0.0));
+ y=1/(N+0.0)*np.dot(ft,g);
+ return  y
+
+senal_filt=ift(tf[:,1],np.shape(tf)[0]);
+fig_3=plt.figure()
+plt.plot(signal[:,0],senal_filt)
+plt.plot(signal[:,0],signal[:,2])
+plt.xlabel('Tiempo');
+plt.ylabel('Magnitud');
+plt.savefig("RozoDaniel_filtrada.pdf",dpi=fig_3.dpi);
 
 
+ 
 
 
 
