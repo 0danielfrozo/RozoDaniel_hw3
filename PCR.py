@@ -52,3 +52,8 @@ plt.ylabel('Componente 2');
 fig_1.suptitle('Proyeccion 1 vs 2')
 fig_1.savefig('RozoDaniel_PCA.pdf');
 
+##Imprima un mensaje diciendo si el metodo de PCA es util para hacer esta clasificacion, si no sirve o si puede ayudar al diagnostico para ciertos pacientes, argumentando claramente su posicion ##
+
+print 'Se logra ver que el metodo de PCA es util para realizar dicha clasificacion pues se nota claramente que en los componentes prinicpales a partir de un determinado valor se puede diagnosticar si un tumor es benigno o no , dado que se observa  esta tendencia entonces el metodo funciona'
+
+
