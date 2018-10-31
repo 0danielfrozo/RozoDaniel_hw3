@@ -20,7 +20,11 @@ fig_1.savefig("RozoDaniel_FT2D.pdf");
 # Haga un filtro que le permita eliminar el ruido periodico de la imagen.  Para esto haga pruebas de como debe modificar la transformada de Fourier #
 
 filtrado=ft_imagen.copy()
-filtrado[np.where(ft_Log>0.9 *np.max(ft_Log))]=1;
+
+filtrado[192,192]=0.001
+filtrado[138,152]=0.001
+filtrado[118,104]=0.001
+filtrado[64,64]=0.001
 ft_Log=np.log(np.abs(filtrado));
 
 
@@ -29,12 +33,13 @@ ft_Log=np.log(np.abs(filtrado));
 
 fig_2=plt.figure()
 plt.imshow(ft_Log);
+fig_2.savefig("RozoDaniel_FT2D_filtrada.pdf");
 
 
 # Haga la transformada de Fourier inversa y grafique la imagen filtrada.  Verifique que su filtro elimina el ruido periodico y guarde dicha imagen sin mostrarla en ApellidoNombre_Imagen_filtrada.pdf #
 
 
-img_filt= np.abs(ifft2(filtrado))
+img_filt= np.abs(ifft2(np.fft.ifftshift(filtrado)))
 fig_3=plt.figure()
-plt.imshow(img_filt);
-plt.show()
+plt.imshow(img_filt,cmap='gray');
+fig_3.savefig("RozoDaniel_Imagen_filtrada.pdf");
