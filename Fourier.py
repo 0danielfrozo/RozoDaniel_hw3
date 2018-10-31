@@ -61,10 +61,7 @@ plt.ylabel('Magnitud');
 plt.savefig("RozoDaniel_filtrada.pdf",dpi=fig_3.dpi);
 
 #Escriba un mensaje en la terminal explicando por que no puede hacer la transformada de Fourier de los datos de incompletos.dat #
-#fig=plt.figure()
-#plt.plot(incompletos[:,0],incompletos[:,2]);
-#plt.show()
-
+print 'No se puede hacer una transformada de fourier debido a que los datos al estar incompletos no estan igualmente espaciados en el tiempo entre si por lo cual no es posible realizar correctamente la transformada discreta de fourier.'
 # Haga una interpolacion cuadratica y una cubica de sus datos incompletos.dat con 512 puntos.  Haga la trasformada de Fourier de cada una de las series de datos interpoladas #
 
 cuad=interp1d(incompletos[:,0],incompletos[:,2],kind='quadratic');
