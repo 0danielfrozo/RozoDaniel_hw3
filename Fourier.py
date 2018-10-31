@@ -61,7 +61,9 @@ plt.ylabel('Magnitud');
 plt.savefig("RozoDaniel_filtrada.pdf",dpi=fig_3.dpi);
 
 #Escriba un mensaje en la terminal explicando por que no puede hacer la transformada de Fourier de los datos de incompletos.dat #
+
 print 'No se puede hacer una transformada de fourier debido a que los datos al estar incompletos no estan igualmente espaciados en el tiempo entre si por lo cual no es posible realizar correctamente la transformada discreta de fourier.'
+
 # Haga una interpolacion cuadratica y una cubica de sus datos incompletos.dat con 512 puntos.  Haga la trasformada de Fourier de cada una de las series de datos interpoladas #
 
 cuad=interp1d(incompletos[:,0],incompletos[:,2],kind='quadratic');
@@ -97,7 +99,7 @@ plt.title("Cubica")
 plt.savefig("RozoDaniel_TF_interpola.pdf",dpi=fig_4.dpi);
 
 # Imprima un mensaje donde describa las diferencias encontradas entre la transformada deFourier de la senal original y las de las interpolaciones #
-
+print 'Se logra ver que las senales interpoladas presenta mayor numero de picos que la senal original razon por la cual la transformada de fourier de estas es ligeremanete diferente a la original. Se logra ver que el pico no se da de manera abrupta en las interpolaciones sino que se da de manera mas grafdual que en la senal original.'
 
 #Aplique el filtro pasabajos con una frecuencia de corte fc=1000 Hz y con una frecuencia de corte de fc=500Hz#
 
